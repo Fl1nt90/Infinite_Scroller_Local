@@ -1,8 +1,9 @@
 //Unsplash API
-const ACC_KEY = "hf2rB167TuKJqjyqhQXdrlm4S-QarljFWbYv2StjXMs";
-// BACKUP KEY: D4reuy0cjFZGln67Ii4FUadiflVxw6niV0XmfcpwxR0
-const count = 2; //the count of the photo to be loaded
-const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${ACC_KEY}&count=${count}`;
+let ACC_KEY = "hf2rB167TuKJqjyqhQXdrlm4S-QarljFWbYv2StjXMs";
+const BACKUP_KEY = "D4reuy0cjFZGln67Ii4FUadiflVxw6niV0XmfcpwxR0";
+
+let initialCount = 2; //the count of the photo to be loaded
+let apiUrl = `https://api.unsplash.com/photos/random/?client_id=${ACC_KEY}&count=${initialCount}`;
 
 const imageContainer = document.querySelector(".image-container");
 const loader = document.getElementById("loader");
@@ -14,6 +15,13 @@ let imagesLoaded = 0;
 let totalImages = 0; //to keep track of the total images
 
 
+/* MY TWEEK: helper function to update apiUrl. Will be necessary to update the count and replace the
+account KEY in case of error */
+const updateApiUrl = function(key = ACC_KEY, count = initialCount) {
+  apiUrl = `https://api.unsplash.com/photos/random/?client_id=${key}&count=${count}`;
+};
+
+
 //FUNCTION FIRED AFTER EVERY IMAGE IS LOADED
 const loaded = function () {
   imagesLoaded ++; //every loaded image, increase the counter by 1
@@ -21,6 +29,8 @@ const loaded = function () {
   if (imagesLoaded === totalImages) {
     readyBoolean = true; //se the ready boolean to TRUE
     loader.hidden = true; //hide the loader
+  //increase the initial count to load more photos
+    updateApiUrl(undefined, 10); //skip first parameter/pass second parameter/pass only second parameter
   }
 };
 
@@ -60,17 +70,21 @@ const getPhotos = async function () {
     results = await response.json(); //convert to JSON and pass to the global variable
     displayPhotos(results); //call the function to display photos
   } catch (err) {
-    console.log(err);
-  }
+      console.log(err);
+    //replace KEY if reached the limit
+      if (err = '403') {
+        updateApiUrl(BACKUP_KEY); //update the apiUrl with new KEY
+        getPhotos(); //immediately re-call the function
+    };
+  };
 };
 getPhotos(); //immediately call at run-time
 
 
 //SCROLL EVENT LISTENER
 window.addEventListener("scroll", function () {
-  if ((window.innerHeight + window.scrollY > document.body.offsetHeight) && readyBoolean) {
+  if ((window.innerHeight + window.scrollY > document.body.offsetHeight - 1000) && readyBoolean) {
     getPhotos();
     readyBoolean = false; //reset the readyBoolean variable after loading new images
-    loader.hidden = false; //show the loader
   }
 });
