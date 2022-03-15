@@ -2,7 +2,7 @@
 let ACC_KEY = "hf2rB167TuKJqjyqhQXdrlm4S-QarljFWbYv2StjXMs";
 const BACKUP_KEY = "D4reuy0cjFZGln67Ii4FUadiflVxw6niV0XmfcpwxR0";
 
-let initialCount = 2; //the count of the photo to be loaded
+let initialCount = 3; //the count of the photo to be loaded
 let apiUrl = `https://api.unsplash.com/photos/random/?client_id=${ACC_KEY}&count=${initialCount}`;
 
 const imageContainer = document.querySelector(".image-container");
