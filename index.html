@@ -4,20 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Infinite Scrolling</title>
+    <title>Local Gallery</title>
     <link rel="icon" href="img/favicon.ico" />
     <link rel="stylesheet" href="style.css" />
+    <script type="module" defer src="script.js"></script> 
   </head>
   <body>
-    <h1>UNSPLASH API - INIFITE SCROLL</h1>
+    <h1>Local Gallery</h1>
     <!-- title -->
     <!-- Loader -->
-    <div class="loader" id="loader">
+    <div class="loader" id="loader" hidden>
       <img src="img/loader.svg" alt="Loading" />
     </div>
+
+    <!-- Upload Pictures/create images -->
+    <div class="upload" id="upload" hidden>
+      <input id="file" type="file" multiple />
+      <button id="go">Go</button>
+      <div id="output"></div>
+    </div>
+
     <!-- Image Container -->
     <div class="image-container" id="image-container"></div>
     <!-- Script -->
-    <script src="script.js"></script>
-  </body>
 </html>

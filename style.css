@@ -17,6 +17,16 @@ h1 {
   font-size: 40px;
   letter-spacing: 5px;
 }
+.upload {
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgba(245, 245, 245, 0.8); /* opacity backgroud */
+}
+
+#output {
+  /* css id / id css / selecty by id css */
+  padding: 1%;
+}
 
 /* Loader */
 .loader {
