@@ -10,7 +10,15 @@
     <script type="module" defer src="script.js"></script> 
   </head>
   <body>
+  <div id="title">
     <h1>Local Gallery</h1>
+      <div class="upload" id="upload" hidden>
+        <input id="file" type="file" multiple />
+        <button id="go">Go</button>
+        <div id="output"></div>
+    </div>
+  </div>
+
     <!-- title -->
     <!-- Loader -->
     <div class="loader" id="loader" hidden>
@@ -18,13 +26,16 @@
     </div>
 
     <!-- Upload Pictures/create images -->
-    <div class="upload" id="upload" hidden>
-      <input id="file" type="file" multiple />
-      <button id="go">Go</button>
-      <div id="output"></div>
-    </div>
+
 
     <!-- Image Container -->
     <div class="image-container" id="image-container"></div>
-    <!-- Script -->
+    <!-- Functionalities button -->
+  <div class="footer">
+    <div class="buttons">
+      <button id="sort">Sort</button>
+      <button id="randomize">Randomize</button>
+    </div>
+  </div>
+
 </html>
