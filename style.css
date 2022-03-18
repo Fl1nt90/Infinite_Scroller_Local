@@ -64,7 +64,7 @@ h1 {
   width: 100%;
   text-align: center;
 }
-button {
+.footer button { /* So that i don't style other buttons  */
   margin: 0.5%;
   cursor: pointer;
   font-size: 1.2rem;
@@ -86,4 +86,5 @@ button {
   .image-container {
     margin: 10px 8%; /* reduce margin on mobile */
   }
+
 }

@@ -13,18 +13,18 @@ const state = {
   ],
 };
 
-export let imgHtmlArray = state.initial; //initial state
+export let tempPhotoArray = state.initial; //initial state
 
 export const reverse = function () {
   //function to reverse the order of the photo
   if (!state.reversed) {
-    imgHtmlArray = []; //empty the array
+    tempPhotoArray = []; //empty the array
     for (let i = state.initial.length - 1; i >= 0; i--) {
-      imgHtmlArray.push(state.initial[i]);
+      tempPhotoArray.push(state.initial[i]);
     }
     state.reversed = true; //set the boolean
   } else {
-    imgHtmlArray = state.initial;
+    tempPhotoArray = state.initial;
     state.reversed = false;
   }
 };
@@ -51,6 +51,7 @@ export const randomize = function (array) {
   return array;
 };
 
+//upload picture, create HTML and push the result into array
 let html;
 //create HTML and copy to cliboard
 export const go = function () {

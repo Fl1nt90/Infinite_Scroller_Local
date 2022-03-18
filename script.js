@@ -2,10 +2,9 @@ import {
   go,
   reverse,
   randomize,
-  imgHtmlArray as results,
+  tempPhotoArray,
 } from "./filelist.js";
 
-let initialCount = 3; //the count of the photo to be loaded
 
 const title = document.querySelector("h1");
 const uploadContainer = document.getElementById("upload");
@@ -16,56 +15,83 @@ const goButton = document.getElementById("go");
 
 let showUpload = false;
 
+const count = 3; //image to load every scroll
 let readyBoolean = false; //variable to check if all images are loaded
 let imagesLoaded = 0;
 let totalImages = 0; //to keep track of the total images
 
+let imagesDisplayed = []; //need the global array to later sort/randomize
+
+
 //FUNCTION FIRED AFTER EVERY IMAGE IS LOADED
 const loaded = function () {
   imagesLoaded++; //every loaded image, increase the counter by 1
+  console.log(imagesLoaded, totalImages);
 
   if (imagesLoaded === totalImages) {
     readyBoolean = true; //se the ready boolean to TRUE
     loader.hidden = true; //hide the loader
-    //increase the initial count to load more photos
-    updateApiUrl(undefined, 10); //skip first parameter/pass second parameter/pass only second parameter
   }
 };
 
-//CREATE HTML FOR IMAGES
-const displayPhotos = function () {
-  //set the totalImages variable
-  totalImages += results.length;
+//DISPLAY THE PHOTO ON THE PAGE
+const displayPhotos = function (photos) {
   //loop over the photos array and create element for every object in the array
-  results.forEach((photo) => {
+  photos.forEach((element) => {
     const img = document.createElement("img"); //create image element
-    img.setAttribute("src", photo); //set the source
+    img.setAttribute("src", element); //set the source
     imageContainer.appendChild(img); //insert in the page
     //event listener for load event for every image
     img.addEventListener("load", function () {
-      console.log("dio");
+      loaded();
     });
   });
 };
-displayPhotos();
 
-// //AJAX API CALL
-// const getPhotos = async function () {
-//   try {
-//     const response = await fetch(apiUrl); //to make a GET request, just pass the url
-//     if (!response.ok) throw new Error(response.status); //throw error
-//     results = await response.json(); //convert to JSON and pass to the global variable
-//     displayPhotos(results); //call the function to display photos
-//   } catch (err) {
-//     console.log(err);
-//   }
+//GET AND SLICE THE PHOTOS
+const getPhotos = function () {
+    const slicePhotosArray = tempPhotoArray.slice(imagesLoaded, imagesLoaded + count)
+    imagesDisplayed.push(slicePhotosArray); //push to the global array
+    console.log(slicePhotosArray, imagesDisplayed);
+    totalImages += slicePhotosArray.length; 
+    displayPhotos(slicePhotosArray);
+};
+getPhotos(); //immediately call at run-time
+
+
+// //get photos, slice and show on the page
+// const getSliceDisplayPhotos = function () {
+//   //slice the array, push into the displayed images and set the totalImages variable
+//     const slicePhotosArray = tempPhotoArray.slice(imagesLoaded, imagesLoaded + count)
+//     imagesDisplayed.push(slicePhotosArray); //push to the global array
+//     totalImages += slicePhotosArray.length; 
+
+//   //display the images on the page, looping over the scliced array
+//     slicePhotosArray.forEach((element) => {
+//     const img = document.createElement("img"); //create image element
+//     img.setAttribute("src", element); //set the source
+//     imageContainer.appendChild(img); //insert in the page
+
+//   //event listener for load event for every image
+//     img.addEventListener("load", function () {
+//       loaded(); //call the loaded function
+//     });
+//   });
 // };
-// getPhotos(); //immediately call at run-time
+// getSliceDisplayPhotos();
+
+
+//CLEAN THE PHOTOS IN THE IMAGE CONTAINER /remove childre/remove all the child/delete children
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
 
 //SCROLL EVENT LISTENER
 window.addEventListener("scroll", function () {
   if (
-    window.innerHeight + window.scrollY > document.body.offsetHeight - 1000 &&
+    window.innerHeight + window.scrollY > document.body.offsetHeight -300 &&
     readyBoolean
   ) {
     getPhotos();
@@ -73,12 +99,6 @@ window.addEventListener("scroll", function () {
   }
 });
 
-//RANDOMIZE PHOTOS
-function removeAllChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
-}
 
 //UPLOAD CONTAINER ----------------------------------------------------------------
 //show/hide upload container when clicking on the title
@@ -99,13 +119,14 @@ goButton.addEventListener("click", function () {
   showUpload = false;
 });
 
+//SORT and RANDOMIZE BUTTONS EVENT LISTENER
 buttonsContainer.addEventListener("click", function (e) {
   e.preventDefault();
 
   if (!e.target.id) return;
   removeAllChildNodes(imageContainer);
-  if (e.target.id === "randomize") randomize(results);
+  if (e.target.id === "randomize") randomize(imagesDisplayed);
   if (e.target.id === "sort") reverse();
 
-  displayPhotos();
+  displayPhotos(imagesDisplayed);
 });
