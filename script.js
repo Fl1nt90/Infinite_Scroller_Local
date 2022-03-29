@@ -131,7 +131,8 @@ buttonsContainer.addEventListener("click", function (e) {
     sorted = !sorted; //at everey click, sort will change to its opposite (false-->true--false etc.)
   };
   if (e.target.id === "top") { //scroll to the top/scroll top
-    window.scrollTo(0, 0) 
+    window.scroll(top); //NOT WORK ON MOBILE
+    // document.scrollingElement.scrollTop()
   }
 
   displayPhotos(imagesDisplayed, true);
