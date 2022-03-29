@@ -93,4 +93,9 @@ h1 {
     margin: 10px 8%; /* reduce margin on mobile */
   }
 
+  #top {
+    font-size: 0.6rem;
+    padding: 0.5% 0.6rem;
+
+}
 }
