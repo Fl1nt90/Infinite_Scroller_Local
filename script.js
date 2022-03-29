@@ -125,10 +125,13 @@ buttonsContainer.addEventListener("click", function (e) {
   if (e.target.id === "randomize") {
     randomize(imagesDisplayed);
     sorted = false; //reset the variable, so that sorting will start from the first photo
-  }
+  };
   if (e.target.id === "sort") {
     sortPhotos(imagesDisplayed, sorted);
     sorted = !sorted; //at everey click, sort will change to its opposite (false-->true--false etc.)
+  };
+  if (e.target.id === "top") { //scroll to the top/scroll top
+    window.scrollTo(0, 0) 
   }
 
   displayPhotos(imagesDisplayed, true);
