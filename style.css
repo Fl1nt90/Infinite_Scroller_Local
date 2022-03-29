@@ -81,6 +81,8 @@ h1 {
   position: absolute;
   bottom: 0%;
   right: 0%;
+  padding: 0.3rem;
+
 }
 
 
@@ -95,6 +97,6 @@ h1 {
   }
 
   #top {
-    font-size: 0.3rem;
+    font-size: 0.6rem;
 }
 }
