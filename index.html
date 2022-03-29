@@ -8,16 +8,35 @@
     <link rel="icon" href="img/favicon.ico" />
     <link rel="stylesheet" href="style.css" />
     <script type="module" defer src="script.js"></script> 
+    <script src="node_modules\exif-js\exif.js"></script> <!-- GET EXIF -->
   </head>
   <body>
   <div id="title">
     <h1>Local Gallery</h1>
       <div class="upload" id="upload" hidden>
-        <input id="file" type="file" multiple />
-        <button id="go">Go</button>
+        <input id="file-input" type="file" multiple/>
         <div id="output"></div>
     </div>
   </div>
+
+
+<!-- 
+  <script>        document.getElementById("file-input").onchange = function(e) {
+            var file = e.target.files[0]
+            if (file && file.name) {
+                EXIF.getData(file, function() {
+                    var exifData = EXIF.pretty(this);
+                    if (exifData) {
+                        alert(exifData);
+                    } else {
+                        alert("No EXIF data found in image '" + file.name + "'.");
+                    }
+                });
+            }
+        }</script> -->
+
+
+
 
     <!-- title -->
     <!-- Loader -->
