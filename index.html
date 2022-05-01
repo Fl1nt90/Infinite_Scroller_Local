@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Local Gallery</title>
+    <title>Infinite Gallery</title>
     <link rel="icon" href="img/favicon.ico" />
     <link rel="stylesheet" href="style.css" />
     <script type="module" defer src="script.js"></script> 
@@ -21,31 +21,12 @@
   </div>
 
 
-<!-- 
-  <script>        document.getElementById("file-input").onchange = function(e) {
-            var file = e.target.files[0]
-            if (file && file.name) {
-                EXIF.getData(file, function() {
-                    var exifData = EXIF.pretty(this);
-                    if (exifData) {
-                        alert(exifData);
-                    } else {
-                        alert("No EXIF data found in image '" + file.name + "'.");
-                    }
-                });
-            }
-        }</script> -->
-
-
-
 
     <!-- title -->
     <!-- Loader -->
     <div class="loader" id="loader" hidden>
       <img src="img/loader.svg" alt="Loading" />
     </div>
-
-    <!-- Upload Pictures/create images -->
 
 
     <!-- Image Container -->
