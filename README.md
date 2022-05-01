@@ -56,3 +56,5 @@ export const sortPhotos = function(array, sorted) {
       loaded(randomizing); //need to call to increase the counter and don't broke scroll functionality
     }
 ```
+
+
